@@ -333,58 +333,32 @@ $this->title = $page->seo('title', $page->model->title);
        <section class="multi-widget-options">
     	<div class="container">
         	<div class="row">
-            	
-                <div class="col-xs-12 col-sm-4">
-                	<div class="upcoming-event">
-                    <h2 class="head-border-default">Upcoming Event</h2>
-                    	
-                        <a href="#"><img src="images\use_img\event_img.png" alt=""></a>
-                        <h4><a href="#">IOS App Development</a></h4>
-                        <p class="meta">on: <strong>Aug25. 2015</strong> . at: <strong>NewYork Tower, Melbourne</strong></p>
-                        
-                        <a href="#" class="more">Read More <i class="lnr lnr-arrow-right"></i></a>
-                    </div>
-                 </div> <!-- col 1 #end -->
+                  <h3 class="text-center head-border-orange">Thông tin & sự kiện</h3>
+               
+                
+                <?php
+                $news = \yii\easyii\modules\news\models\News::find()->where('status = 1')->all();
+                  foreach ($news as $blog):
+                       
+                 
+                ?>
                 
                 <div class="col-xs-12 col-sm-4">
-                	<div class="instructor-week">
-                    	<h2 class="head-border-default">Instructor of the Week</h2>
-                        
-                        <div class="col-xs-12 col-sm-6 remove_space">
-                        	<a href="#"><img src="images\use_img\instructor_img.png" alt=""></a>
-                        </div>
-                        
-                         <div class="col-xs-12 col-sm-6 remove_space">
-                         	<p class="author-name"><strong><a href="#">James Anderson</a></strong>
-                            <span>Chemistry Professor</span></p>
-                            
-                            <p class="phone"><i class="lnr lnr-smartphone"></i>Phone  <strong>+731 234 5678</strong></p>
-                            <p class="email">Email me at <a href="#">james@gmail.com</a></p>
-                            
-                         </div>
-                        
-                        
+                	
+                    
+                    	
+                        <a href="#"><img src="images\use_img\course_img7.png" alt=""></a>
+                        <h5><a href="#">Wordpress Framework</a></h5>
+                        <i>Aug25. 2015</i>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing
 Nunc varius sed dolor sed sagittis. Morbi quis eros 
 ornare, rhoncus lorem a, efficitur erat.</p>
-						
-                         <a href="#" class="more">Read More <i class="lnr lnr-arrow-right"></i></a>
-                        
-                    </div>
-                </div> <!-- col 2 #end -->
-                
-                <div class="col-xs-12 col-sm-4">
-                	<div class="free-course-week">
-                    <h2 class="head-border-default">Free Course of the Week</h2>
-                    	
-                        <a href="#"><img src="images\use_img\course_img7.png" alt=""></a>
-                        <h4><a href="#">Wordpress Framework</a></h4>
-                        <p class="meta">on: <strong>Aug25. 2015</strong> . in: <strong><a href="#">Web Development</a></strong></p>
-                        
                         <a href="#" class="more">Read More <i class="lnr lnr-arrow-right"></i></a>
-                    </div>
+                  
                 </div> <!-- col 3 #end -->
-                
+                <?php
+                 endforeach;
+                ?>
             </div><!-- /row  #end -->
         </div><!-- /container  #end -->
     </section> 
