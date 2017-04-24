@@ -1,0 +1,62 @@
+{
+    "name": "noumo/easyii-shop",
+    "description": "Easyiicms simple shop with examples of all modules",
+    "keywords": ["yii2", "cms", "control panel", "admin", "easy", "shop"],
+    "homepage": "http://easyiicms.com",
+    "type": "project",
+    "license": "GNU GPL V3",
+    "support": {
+        "wiki": "http://easyiicms.com/docs",
+        "source": "https://github.com/noumo/easyii-shop.git",
+        "issues": "https://github.com/noumo/easyii-shop/issues"
+    },
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.4.0",
+        "noumo/easyii": "dev-master",
+        "richardfan1126/yii2-js-register": "*",
+        "pjhl/yii2-multilanguage": "~0.2",
+	"noam148/yii2-image-manager" : "*",
+        "modernkernel/yii2-flag-icon-css": "*",
+	
+        
+        
+        "dektrium/yii2-user": "^0.9.12",
+        "xutl/yii2-videojs-widget": "~1.0",
+        "kartik-v/yii2-widget-fileinput": "@dev",
+        "kartik-v/dependent-dropdown": "dev-master",
+        "kartik-v/yii2-widget-select2": "@dev",
+       
+        "kartik-v/yii2-widget-rating": "*",
+        "yii2assets/yii2-pdfjs": ">=1.0",
+        "kartik-v/yii2-widget-datetimepicker": "*"
+        
+    },
+    "require-dev": {
+        "yiisoft/yii2-codeception": "*",
+        "yiisoft/yii2-debug": "*",
+        "yiisoft/yii2-gii": "*",
+        "yiisoft/yii2-faker": "*"
+    },
+    "scripts": {
+        "post-create-project-cmd": [
+            "yii\\composer\\Installer::postCreateProject"
+        ]
+    },
+    "extra": {
+        "yii\\composer\\Installer::postCreateProject": {
+            "generateCookieValidationKey": [
+                "app/config/web.php"
+            ]
+        },
+        "asset-installer-paths": {
+            "npm-asset-library": "vendor/npm",
+            "bower-asset-library": "vendor/bower"
+        },
+	    "writable": [
+            "assets",
+            "uploads",
+            "runtime"
+        ]
+    }
+}
