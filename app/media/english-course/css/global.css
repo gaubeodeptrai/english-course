@@ -394,7 +394,7 @@ h6 {
 	clear: both;
 	color:#262c38; 
 	font-weight:bold;
-	font-family:Montserrat, sans-serif;
+	
 }
 h2.text-center { 
 	background-position:center bottom; 
@@ -629,7 +629,7 @@ input[type="submit"] {
  	border-radius: 3px;
 	background: #ff5722;
 	color:#fff;
-	font-family:Montserrat, sans-serif;
+	
 	font-size: 15px;
 	line-height: 1;
 	padding:15px 25px;
@@ -666,7 +666,7 @@ textarea,
 .wpcf7-select,
 .wpcf7-date {
 	color: #666;
-	font-family:Montserrat, sans-serif;
+	
 	font-size: 15px;
 	border: 1px solid #e4e8ee;
 	border-radius: 0px;
@@ -695,7 +695,7 @@ textarea {
 	padding:8px 10px;
 	width: 98%;
 }
-.btn { font-family:Montserrat, sans-serif; }
+.btn {  }
 
 
 /*--------------------------------------------------------------
@@ -1173,7 +1173,7 @@ background:url(../images/border_bottom.png) no-repeat left bottom; }
 
 .footer-widget a, .footer-widget ul li a { color:#657184; }
 .footer-widget a:hover { color:#fff; }
-.footer-widget .menu { font-family:Montserrat, sans-serif; font-weight:bold; }
+.footer-widget .menu {  font-weight:bold; }
 
 .footer-widget .quickcontact { clear:both; }
 .footer-widget .quickcontact .qc-text { width:97%; margin-bottom:10px; background:#262c38; border:1px solid #3a4251; color:#586375; }

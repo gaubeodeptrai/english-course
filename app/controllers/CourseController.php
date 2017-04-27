@@ -100,14 +100,14 @@ class CourseController extends \yii\web\Controller
         // Dem tong so hoc vien da thanh toan
         $count_person = Good::find()->where(['item_id'=>$cat->model->category_id])->joinWith([
             'order'=> function($query){
-                $query->andWhere('user_id <> 0');
+                $query->andWhere('status = 7');
             },
         ])->count();
         // Kiem tra hoc vien da thanh toan chua
         if (Yii::$app->user->id):    
         $paid = Good::find()->where(['item_id'=>$cat->model->category_id])->joinWith([
             'order'=> function($query){
-                $query->andWhere('user_id ='.Yii::$app->user->id);
+                $query->andWhere('status = 7');
             },
         ])->count();    
         else:

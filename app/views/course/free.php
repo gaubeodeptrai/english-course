@@ -8,7 +8,7 @@ $page = Page::get('free-courses');
 $base = Yii::$app->getUrlManager()->getBaseUrl();
 $this->title = $page->seo('title', $page->model->title);
 //$this->params['breadcrumbs'][] = $page->model->title;
-
+$lang = Yii::$app->language;
 function renderNode($node){
     if(!count($node->children)){
         $html = '<li>'.Html::a($node->title, ['/course/cat', 'slug' => $node->slug]).'</li>';
@@ -62,22 +62,34 @@ function renderNode($node){
      <div id="products" class="list-group"> 
      		<div class="row">  
                    <?php
+                   //echo Yii::$app->user->identity->email;
                    foreach ($courses as $course):
+                       if ($lang == 'vi'){
+                         $title = $course->title;  
+                         $short_description = $course->short_description;
+                         $description = $course->description;
+                         $logan_g = $course->logan_g;
+                       }else{
+                          $title = $course->title_en; 
+                          $short_description = $course->short_description_en;
+                          $description = $course->description_en;
+                          $logan_g = $course->logan_g_en;
+                       }
                    ?> 
                     
                   <div class="col-xs-12 col-sm-6 zoom courses">
                 	<div class="course clist">
                     <a class="img-thumb " href="<?=$base?>/course/cat/<?=$course->slug?>">
                       <figure>
-                        <img alt="<?=$course->title?>" src="<?=$base?><?=$course->image?>" width="360px">
+                        <img alt="<?=$title?>" src="<?=$base?><?=$course->image?>" width="360px">
                       </figure>
                     </a>
                                       
                     <div class="course_space">
-                    <div class="price">Free<span></span></div>
-                    <h3><a href="<?=$base?>/course/cat/<?=$course->slug?>"><?=$course->title?></a></h3>
+                    <div class="price"><?=Yii::t('easyii', 'Free')?><span></span></div>
+                    <h3><a href="<?=$base?>/course/cat/<?=$course->slug?>"><?=$title?></a></h3>
                     <p class="meta">by: <a href="#">Logan G</a></p>
-                    <p><?=$course->short_description?></p>
+                    <p><?=$short_description?></p>
                     
                     
                 	</div> <!--course #end -->

@@ -7,11 +7,12 @@ use yii\easyii\modules\news\api\News;
 use yii\easyii\modules\page\api\Page;
 use yii\easyii\modules\text\api\Text;
 use yii\helpers\Html;
+use pjhl\multilanguage\LangHelper;
 
 $page = Page::get('page-index');
 $base = Yii::$app->getUrlManager()->getBaseUrl();
 $this->title = $page->seo('title', $page->model->title);
-
+$lang = LangHelper::getLanguage(Yii::$app->language)['id'];
 ?>
 <!-- flexslider start -->
 <div class="flexslider">
@@ -337,22 +338,23 @@ $this->title = $page->seo('title', $page->model->title);
                
                 
                 <?php
-                $news = \yii\easyii\modules\news\models\News::find()->where('status = 1')->all();
+                $news = \yii\easyii\modules\news\models\News::find()
+                        ->where('status = 1')
+                        ->andWhere(['lang_id'=>$lang])
+                        ->orderBy(['time'=>SORT_DESC])
+                        ->limit(3)
+                        ->all();
                   foreach ($news as $blog):
                        
                  
                 ?>
                 
                 <div class="col-xs-12 col-sm-4">
-                	
-                    
-                    	
-                        <a href="#"><img src="images\use_img\course_img7.png" alt=""></a>
-                        <h5><a href="#">Wordpress Framework</a></h5>
-                        <i>Aug25. 2015</i>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing
-Nunc varius sed dolor sed sagittis. Morbi quis eros 
-ornare, rhoncus lorem a, efficitur erat.</p>
+
+                    <a href="<?=$base?>/news/view/<?=$blog->slug?>"><img src="<?=$base?><?=$blog->image?>" alt=""></a>
+                        <h5> <?= Html::a($blog->title, ['news/view', 'slug' => $blog->slug]) ?></h5>
+                        <i><?=Yii::$app->formatter->asDate($blog->time, 'dd-mm-YYYY')?></i>
+                        <p><?=$blog->short?></p>
                         <a href="#" class="more">Read More <i class="lnr lnr-arrow-right"></i></a>
                   
                 </div> <!-- col 3 #end -->

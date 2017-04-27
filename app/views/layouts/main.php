@@ -31,8 +31,8 @@ $langs = Yii::$app->params['languages'];
             <div class="container">
                 <div class="row">
                     <p class="site-description col-xs-12 col-sm-6">
-                        <img src="http://clara.com.vn/image/vietnam.gif" width="20px">
-                        <img src ="http://clara.com.vn/image/english.png" width="20px">
+                        <a href="#" class="multilanguage-set" data-language="2"><img src="http://clara.com.vn/image/vietnam.gif" width="20px"></a>
+                        <a href="#" class="multilanguage-set" data-language="1"><img src ="http://clara.com.vn/image/english.png" width="20px"></a>
                     </p>
                     <nav class="meta-login">
                         <style>
@@ -46,15 +46,16 @@ $langs = Yii::$app->params['languages'];
 
                             <li class="languagle"> <img src="http://clara.com.vn/image/vietnam.gif" width="20px">
                                 <img src ="http://clara.com.vn/image/english.png" width="20px"></li>
-                            <li class="call"><i class="lnr lnr-smartphone"></i>Call Us  +731 234 5678</li>
+                            <li class="call"><i class="lnr lnr-phone-handset"></i>0936.437.467</li>
                             
                             
                             <?php
                               if (Yii::$app->user->isGuest){
                             ?>
-                            <li><a href="#register-form" class="fancybox">Signup</a></li>
-                            <li><a href="<?=$base?>/user/security/login">Login</a></li>
-                            <li><a href="#login-form" class="fancybox">Login</a></li>
+                            <li><a href="#login-form" class="fancybox"><?=Yii::t('user', 'Login')?></a></li>
+                            <li><a href="#register-form" class="fancybox"><?=Yii::t('user', 'Sign up')?></a></li>
+                           
+                            
                             
                             <?php
                               }  else {
@@ -98,13 +99,13 @@ $langs = Yii::$app->params['languages'];
                        $count_item = 0;
                     endif; 
  $menuItems = [
-    ['label' => 'Home', 'url' => ['/'], 'active' => $this->context->route == 'site/index'],
-    ['label' => 'About us', 'url' => ['/about'], 'active' => $this->context->route == 'site/about'],
-    ['label' => 'Free Courses', 'url' => ['/course/free'], 'active' => $this->context->route == 'course/free'],
-    ['label' => 'Premium Courses', 'url' => ['/course'], 'active' => $this->context->route == 'course/index'],   
-    ['label' => 'FAQ', 'url' => ['/faq'], 'active' => $this->context->route == 'faq/index'],
-    ['label' => 'Blogs', 'url' => ['/news'], 'active' => $this->context->route == 'news/index'],
-    ['label' => 'Contact', 'url' => ['/contact'], 'active' => $this->context->route == 'contact/index'],   
+    ['label' => Yii::t('easyii', 'Home'), 'url' => ['/'], 'active' => $this->context->route == 'site/index'],
+    ['label' => Yii::t('easyii', 'About us'), 'url' => ['/about'], 'active' => $this->context->route == 'about/index'],
+    ['label' => Yii::t('easyii', 'Free Course'), 'url' => ['/course/free'], 'active' => $this->context->route == 'course/free'],
+    ['label' => Yii::t('easyii', 'Premium Course'), 'url' => ['/course'], 'active' => $this->context->route == 'course/index'],   
+    ['label' => Yii::t('easyii', 'FAQ'), 'url' => ['/faq'], 'active' => $this->context->route == 'faq/index'],
+    ['label' => Yii::t('easyii', 'Blogs'), 'url' => ['/news'], 'active' => $this->context->route == 'news/index'],
+    ['label' => Yii::t('easyii', 'Contact'), 'url' => ['/contact'], 'active' => $this->context->route == 'contact/index'],   
       
 ];
                       
@@ -286,7 +287,7 @@ $langs = Yii::$app->params['languages'];
             </p>
              <p class="text-center">
                 <?php //echo Html::a(Yii::t('user', 'Don\'t have an account? Sign up!'), ['/user/registration/register']) ?>
-                 <a href="#register-form" class="fancybox">Don't have an account? Sign up!</a>
+                 <a href="#register-form" class="fancybox"><?=Yii::t('user', 'Don\'t have an account? Sign up!')?></a>
             </p>
             <p>
                 <a href="user/auth?authclient=facebook" class="btn btn-block btn-social btn-facebook" style="text-align: center;text-decoration: none; color: white">
@@ -302,8 +303,8 @@ $langs = Yii::$app->params['languages'];
 <!-- register popup start -->
 <div id="register-form" style="display:none; padding-left: 20px; padding-right: 20px;" >
      <div class="row">
-     <h3>Register</h3>
-    <p>Please Register to Create a New Account</p>
+     <h3><?=Yii::t('user', 'Register')?></h3>
+    
       <?php
       $model = Yii::createObject(RegistrationForm::className());
       $form = ActiveForm::begin([
@@ -327,7 +328,7 @@ $langs = Yii::$app->params['languages'];
     
     <p class="text-center">
             
-        <a href="#login-form" class="fancybox">Already registered? Sign in!</a>
+        <a href="#login-form" class="fancybox"><?=Yii::t('user', 'Already registered? Sign in!')?></a>
         </p>
     </div>
 </div>

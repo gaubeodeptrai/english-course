@@ -1,6 +1,6 @@
 <?php
 namespace app\modules\courses\models;
-
+use Yii;
 
 class Category extends \yii\easyii\components\CategoryModel
 {
@@ -24,7 +24,7 @@ class Category extends \yii\easyii\components\CategoryModel
     public function rules()
     {
         return [
-            ['title', 'required'],
+            ['title', 'required'],['title_en', 'required'],
             ['type', 'required'],
             ['title', 'trim'],
             ['title', 'string', 'max' => 128],
@@ -34,10 +34,20 @@ class Category extends \yii\easyii\components\CategoryModel
             ['status', 'integer'],
             ['status', 'default', 'value' => self::STATUS_ON],
             ['price', 'number'],
-            ['description', 'safe'],
-            ['short_description', 'safe'],
-            ['logan_g', 'safe'],
+            ['description', 'safe'],['description_en', 'safe'],
+            ['short_description', 'safe'],['short_description_en', 'safe'],
+            ['logan_g', 'safe'],['logan_g_en', 'safe'],
             ['type','safe']
+        ];
+    }
+    
+    public function attributeLabels()
+    {
+        return [
+            'title' => Yii::t('easyii', 'Title VN'),
+            'title_en' => Yii::t('easyii', 'Title EN'),
+            'image' => Yii::t('easyii', 'Image'),
+            'slug' => Yii::t('easyii', 'Slug'),
         ];
     }
     

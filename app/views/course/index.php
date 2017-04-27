@@ -8,6 +8,7 @@ $page = Page::get('page-course');
 $base = Yii::$app->getUrlManager()->getBaseUrl();
 $this->title = $page->seo('title', $page->model->title);
 //$this->params['breadcrumbs'][] = $page->model->title;
+$lang = Yii::$app->language;
 
 function renderNode($node){
     if(!count($node->children)){
@@ -62,20 +63,26 @@ function renderNode($node){
      <div id="products" class="list-group"> 
      		<div class="row">  
                    <?php
+                   
                    foreach ($courses as $course):
+                       if ($lang == 'vi'){
+                         $title = $course->title;  
+                       }else{
+                          $title = $course->title_en;   
+                       }
                    ?> 
                     
                   <div class="col-xs-12 col-sm-6 zoom courses">
                 	<div class="course clist">
                     <a class="img-thumb " href="<?=$base?>/course/cat/<?=$course->slug?>">
                       <figure>
-                        <img alt="<?=$course->title?>" src="<?=$base?><?=$course->image?>" width="360px">
+                        <img alt="<?=$title?>" src="<?=$base?><?=$course->image?>" width="360px">
                       </figure>
                     </a>
                                       
                     <div class="course_space">
                     <div class="price"><?= number_format($course->price, 0, ',','.').' VNĐ';?><span></span></div>
-                    <h3><a href="<?=$base?>/course/cat/<?=$course->slug?>"><?=$course->title?></a></h3>
+                    <h3><a href="<?=$base?>/course/cat/<?=$course->slug?>"><?=$title?></a></h3>
                     <p class="meta">by: <a href="#">Logan G</a></p>
                     <p><?=$course->short_description?></p>
                     

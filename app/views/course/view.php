@@ -172,6 +172,10 @@ if(!empty($item->data->color) && is_array($item->data->color)) {
                     return 'data:video/' . $type . ';base64,' . base64_encode(file_get_contents($file));
                 }
                 //$url = 'uploads/videos/oceans.mp4';
+                
+                
+                           
+                
                 $url = substr($item->model->video, 1);
                 echo \xutl\videojs\VideoJsWidget::widget([
                     'options' => [

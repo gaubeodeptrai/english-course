@@ -4,7 +4,7 @@ use yii\easyii\modules\shopcart\api\Shopcart;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use app\modules\couponcode\models\Coupon;
-
+$base = Yii::$app->getUrlManager()->getBaseUrl();
 $page = Page::get('page-shopcart');
 
 $this->title = $page->seo('title', $page->model->title);
@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $page->model->title;
 	<div class="container">
     	<div class="row">
             <header class="entry-header">
-            <h1 class="entry-title">Shopping Cart</h1>
+            <h1 class="entry-title">Giỏ hàng</h1>
             </header><!-- .entry-header -->
         </div> <!--row #end  -->
     </div>
@@ -29,15 +29,15 @@ $this->params['breadcrumbs'][] = $page->model->title;
 
 
     <div class="col-xs-12 col-sm-9 cart-total">
-            <h3>Cart Totals</h3>
-            <?= Html::beginForm(['/shopcart/update'])?>
+             <h3 style="font-size: 20px">Nội dung giỏ hàng</h3>
+            
 <table class="table">
     <thead>
     <tr>
-        <th>List courses</th>
-        <th width="100">Quantity</th>
-        <th width="120">Unit Price</th>
-        <th width="100">Total</th>
+        <th>Danh sách khóa học</th>
+        <th width="100">Số lượng</th>
+        <th width="120">Giá tiền</th>
+        <th width="100">Thành tiền</th>
         <th width="30"></th>
     </tr>
     </thead>
@@ -48,20 +48,21 @@ $this->params['breadcrumbs'][] = $page->model->title;
            $course_title .=  $good->item->title;
            $course_title .= "<br/>";
     ?>
-        <tr>
-            <td>
+        <tr >
+            <td style="font-size: 17px">
+                <?= Html::img($good->item->thumb(100)) ?><span style="padding-left: 10px"></span>
                 <?= Html::a($good->item->title, ['/course/cat', 'slug' => $good->item->slug]) ?>
                 <?= $good->options ? "($good->options)" : '' ?>
             </td>
-            <td><?=$good->count?></td>
-            <td>
+            <td  style="vertical-align: middle"><?=$good->count?></td>
+            <td  style="vertical-align: middle">
                 <?php if($good->discount) : ?>
                     <del class="text-muted "><small><?= $good->item->oldPrice ?></small></del>
                 <?php endif; ?>
                 <?= $good->price ?>
             </td>
-            <td><?= $good->price * $good->count ?></td>
-            <th><?= Html::a('<i class="glyphicon glyphicon-trash text-danger"></i>', ['/checkout/remove', 'id' => $good->id], ['title' => 'Remove item']) ?></th>
+            <td style="vertical-align: middle"><?= $good->price * $good->count ?></td>
+            <th  style="vertical-align: middle"><?= Html::a('<i class="glyphicon glyphicon-trash text-danger"></i>', ['/checkout/remove', 'id' => $good->id], ['title' => 'Remove item']) ?></th>
         </tr>
     <?php endforeach; ?>
     <tr>
@@ -113,26 +114,16 @@ $this->params['breadcrumbs'][] = $page->model->title;
     </tr>
     </tbody>
 </table>
-    
-<?= Html::endForm()?>
-           
-            <?= Html::beginForm(Url::to(['']), 'post') ?>
              
-             <?= Html::textInput('copupon', '', ['placeholder' => 'Nhập mã giảm giá của bạn']) ?>
        
-            <input name="Apply Coupon" type="submit" value="Áp dụng mã này" class="btn btn-medium btn-default"><br/>
-            <?=$info?>
-            <?= Html::endForm() ?>
     </div> <!-- col 1 #end -->
 
      <div class="col-xs-12 col-sm-3 cart-total">
-            <h3>Thanh toán</h3>
-<div class="well well">
-    <a href="https://www.baokim.vn/payment/product/version11?business=anhvu26%40gmail.com&user_id=<?=Yii::$app->user->id?>&order_id=<?=$good->order_id?>&product_name=<?=$course_title?>&product_price=120000&product_quantity=1&total_amount=<?= $total?> &url_cancel=&url_detail=http%3A%2F%2Flocalhost%2Fyii-logistic%2Fshop%2Fview%2Fiphone-6&url_success=http%3A%2F%2Flocalhost%2Fyii-logistic%2Fcheckout%2Fsuccess">
-        <img src="http://www.baokim.vn/developers/uploads/baokim_btn/thanhtoan-l.png" alt="Thanh toán an toàn với Bảo Kim !" border="0" title="Thanh toán trực tuyến an toàn dùng tài khoản Ngân hàng (VietcomBank, TechcomBank, Đông Á, VietinBank, Quân Đội, VIB, SHB,... và thẻ Quốc tế (Visa, Master Card...) qua Cổng thanh toán trực tuyến BảoKim.vn" ></a>
-    <?php //echo  Shopcart::form(['successUrl' => Url::to('/shopcart/success')])?>
-</div>
-
+         <h3 style="font-size: 20px">Hóa đơn của bạn</h3>
+            <h5> Thành tiền : <?= $total ?> </h5> 
+            <a href="<?=$base?>/checkout/payment">
+               <button class="btn btn-orange btn-medium">Tiến hành thanh toán<i class="lnr lnr-arrow-right"></i></button>  
+            </a>
     </div> <!-- col 2 #end -->
 
     </div>

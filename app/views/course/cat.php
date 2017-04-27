@@ -8,12 +8,25 @@ $this->title = $cat->seo('title', $cat->model->title);
 $this->params['breadcrumbs'][] = ['label' => 'Course', 'url' => ['course/index']];
 $this->params['breadcrumbs'][] = $cat->model->title;
 $base = Yii::$app->getUrlManager()->getBaseUrl();
+$lang = Yii::$app->language;
+
+if ($lang == 'vi'){
+ $title = $cat->model->title;  
+ $short_description = $cat->model->short_description;
+ $description = $cat->model->description;
+ $logan_g = $cat->model->logan_g;
+}else{
+  $title = $cat->model->title_en; 
+  $short_description = $cat->model->short_description_en;
+  $logan_g = $cat->model->logan_g_en;
+  $description = $cat->model->description_en;
+}
 ?>
 <div class="breadcrumb-section">
 	<div class="container">
     	<div class="row">
             <header class="entry-header">
-            <h1 class="entry-title"><?=$cat->model->title?></h1>
+            <h1 class="entry-title"><?=$title?></h1>
             </header><!-- .entry-header -->
         </div> <!--row #end  -->
     </div>
@@ -26,11 +39,11 @@ $base = Yii::$app->getUrlManager()->getBaseUrl();
             <p>
                 <a href="/">HOME</a><i class="fa fa-angle-right"></i>
                 <?php if ($cat->model->type == 'premium'): ?>
-                  <a href="<?=$base?>/course/index">Premium Courses</a><i class="fa fa-angle-right"></i>
+                  <a href="<?=$base?>/course/index"><?=Yii::t('easyii', 'Premium Course')?></a><i class="fa fa-angle-right"></i>
                 <?php else :?>
-                  <a href="<?=$base?>/course/free">Free Courses</a><i class="fa fa-angle-right"></i>
+                  <a href="<?=$base?>/course/free"><?=Yii::t('easyii', 'Free Course')?></a><i class="fa fa-angle-right"></i>
                 <?php endif;?>  
-                 <?=$cat->model->title?>
+                 <?=$title?>
             </p>
         </div> <!--row #end  -->
     </div>
@@ -43,10 +56,10 @@ $base = Yii::$app->getUrlManager()->getBaseUrl();
                 <main id="main" class="site-main col-xs-12 col-sm-8 left-block">
                 	
                      <div class="courses-info">
-                     	<h1><?=$cat->model->title;?></h1>
-                        <p class="excerpt"><?=$cat->model->short_description;?></p>
+                     	<h1><?=$title;?></h1>
+                        <p class="excerpt"><?=$short_description?></p>
                         
-                         <p class="meta">Logan G : <?=$cat->model->logan_g;?></p>
+                         <p class="meta">Logan G : <?=$logan_g;?></p>
                      </div><!--courses-info #end  -->
                 	
                     
@@ -57,12 +70,12 @@ $base = Yii::$app->getUrlManager()->getBaseUrl();
                         </a>
                     
                     <div class="courses-info">
-                    	<h3>Miêu tả khóa học</h3>
-                        <?=$cat->model->description;?>
+                    	<h3><?=Yii::t('easyii', 'Course Description')?></h3>
+                        <?=$description;?>
                         
                 <!-- courses-curriculum #start -->    
                <section class="courses-curriculum clearfix">
-                   <h3>Nội dung khóa học</h3>
+                   <h3><?=Yii::t('easyii', 'Course Content')?></h3>
                <?php
                 $cats = \app\modules\courses\models\Category::find()
                 ->where(['tree'=>$cat->model->category_id])
@@ -120,8 +133,9 @@ $base = Yii::$app->getUrlManager()->getBaseUrl();
        
      <div class="courses-info clearfix">
         <div class="">
-            <h3>REVIEWS</h3>
             <?php if (count($comments) > 0) :?>
+            <h3><?=Yii::t('easyii', 'Review')?></h3>
+            
              <ul class="review-list">
         	
              <?php foreach (app\modules\comment\api\Guestbook::items(['pagination' => ['pageSize' => 10]],$cat->model->category_id) as $comment): ?> 
@@ -140,11 +154,11 @@ $base = Yii::$app->getUrlManager()->getBaseUrl();
                                   'disabled' => true,
                                    
                                   'pluginOptions' => [
-                                      'displayOnly' => true,
+                                      'displayOnly' => FALSE,
                                       'size' => 'l',
                                       'theme' => 'Glyphicons Halflings',
                                       'filledStar' => '<i class="glyphicons glyphicon-star"></i>',
-                                      'emptyStar' => '<span class="glyphicon glyphicon-star-empty"></span>',
+                                     
                                       
                                    ] 
                                 ]);
@@ -168,7 +182,7 @@ $base = Yii::$app->getUrlManager()->getBaseUrl();
         
         
         <div class="">
-        	<h3>Add a Review</h3>
+        	<h3><?=Yii::t('easyii', 'Add a review')?></h3>
             <div class="row">
               <div class="review_form">
                 <div class="review-right col-xs-12 col-sm-9">  
@@ -191,7 +205,7 @@ $base = Yii::$app->getUrlManager()->getBaseUrl();
             <div id="secondary" class="widget-area col-xs-12 col-sm-4 left-block" role="complementary">
                 <div class="co-join-info">
                     <?php if ($cat->model->type == 'premium'): ?>  
-                       <p class="co-price">Price:  <span><?= number_format($cat->model->price, 0, ',','.').' VNĐ';?></span></p>
+                       <p class="co-price"><?=Yii::t('easyii', 'Price')?>:  <span><?= number_format($cat->model->price, 0, ',','.').' VNĐ';?></span></p>
                      <?php else: ?>
                        <p class="co-price"></p>
                      <?php endif;?>     
@@ -199,7 +213,7 @@ $base = Yii::$app->getUrlManager()->getBaseUrl();
                       <?php if ($cat->model->type == 'premium'): ?>  
                         <?php if ($paid > 0 ):?>
                           
-                        <button class="btn btn-orange">Bạn đang sở hữu khóa học này</button>
+                        <button class="btn btn-orange"><?=Yii::t('easyii', 'You have this course')?></button>
                         <?php else:?>
                           <?= Html::a('Buy this course', ['checkout/add', 'id' => $cat->model->category_id], ['class' => 'btn btn-orange']) ?> 
                         <?php endif;?>
@@ -229,12 +243,11 @@ $base = Yii::$app->getUrlManager()->getBaseUrl();
                                   'disabled' => true,
                                    
                                   'pluginOptions' => [
-                                      'displayOnly' => true,
+                                      'displayOnly' => FALSE,
                                       'size' => 'l',
                                       'theme' => 'Glyphicons Halflings',
                                       'filledStar' => '<i class="glyphicons glyphicon-star"></i>',
-                                      'emptyStar' => '<span class="glyphicon glyphicon-star-empty"></span>',
-                                      
+                                      //'emptyStar' => '<span class="glyphicon glyphicon-star-empty"></span>',  
                                    ] 
                                 ]);
                        ?>
@@ -257,7 +270,7 @@ $base = Yii::$app->getUrlManager()->getBaseUrl();
                 
                 
                 <aside class="widget widget_courses">
-                <h3 class="widget-title">Similar Courses</h3>
+                <h3 class="widget-title"><?=Yii::t('easyii', 'Similar Courses')?></h3>
                 <ul>
                   <?php
                    //$rating1[] = 0;  

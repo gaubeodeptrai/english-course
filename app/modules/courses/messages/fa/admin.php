@@ -13,7 +13,7 @@ return [
     'Item updated' => 'آیتم ویرایش شد',
     'Item deleted' => 'آیتم حذف شد',
 
-    'Title' => 'عنوان',
+    'Title' => 'Title',
     'Type' => 'نوع',
     'Options' => 'انتخاب ها',
     'Available' => 'در دسترس',
