@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $page->model->title;
             		
                     
                	<div class="col-xs-12 col-sm-12">
-                  
+                  <?=$page->model->text?>
                 </div> <!-- contact-form #end -->
                 
               

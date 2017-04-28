@@ -28,11 +28,19 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
+        $allcourses = \app\modules\courses\models\Category::find()
+                ->where(['status'=>1])
+                ->andWhere('depth = 0')
+                ->limit(6)
+                ->orderBy(['order_num'=>SORT_DESC])
+                ->all();
         
         if(!Yii::$app->getModule('admin')->installed){
             return $this->redirect(['/install/step1']);
         }
-        return $this->render('index');
+        return $this->render('index',[
+            'allcourses' => $allcourses
+        ]);
     }
    
     /**

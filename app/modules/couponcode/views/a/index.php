@@ -57,7 +57,7 @@ $module = $this->context->module->id;
                     </a>
                 </td>
                 <?php if(IS_ROOT) : ?>
-                <td><?php echo $user['email']; ?></td>
+                <td><a href="mailto:<?php echo $user['email']; ?>"><?php echo $user['email']; ?></a></td>
                  <td><?php echo $user['username']; ?></td>
                  <td><?php echo  Yii::$app->formatter->asDate($item->start_date, 'yyyy-MM-dd');?></td>   
                  <td><?php echo  Yii::$app->formatter->asDate($item->end_date, 'yyyy-MM-dd');?></td>  

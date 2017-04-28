@@ -22,11 +22,11 @@ class CheckoutController extends \yii\web\Controller
             'class' => AccessControl::className(),
             'rules' => [
                 [
-                    'actions' => ['login','plan',  'error','index','add'],
+                    'actions' => ['login','plan',  'error','index','add','remove'],
                     'allow' => true,
                 ],
                 [
-                    'actions' => ['logout','remove','success','payment'],
+                    'actions' => ['logout','success','payment'],
                     'allow' => true,
                     'roles' => ['@'],
                 ],

@@ -2,11 +2,14 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 ?>
-<br/>
-<?= Html::beginForm(Url::to(['/shop/search']), 'get', ['class' => 'form-inline']) ?>
-    <div class="form-group">
-        <?= Html::textInput('text', $text, ['class' => 'form-control', 'placeholder' => 'Search']) ?>
-    </div>
-    <?= Html::submitButton('<i class="glyphicon glyphicon-search"></i>', ['class' => 'btn btn-default']) ?>
-<?= Html::endForm() ?>
-<br/>
+
+<?= Html::beginForm(Url::to(['/course/search']), 'get') ?>
+                <fieldset>
+                    <div class="input-group">
+                        <input type="text" name="text" value="<?=  Yii::$app->request->get('text')?>" id="search" placeholder="<?=Yii::t('easyii', 'Enter keywors to find courses you like')?>" value="" class="form-control">
+                        <span class="input-group-btn">
+                            <button type="submit" class="btn btn-orange btn-medium"><i class="lnr lnr-magnifier"></i><?=Yii::t('easyii', 'Search')?></button>
+                        </span>
+                    </div>
+                </fieldset>
+            <?= Html::endForm() ?><!-- #search-form #end  -->

@@ -22,7 +22,7 @@ class CourseController extends \yii\web\Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['login','plan',  'error','index','cat','free'],
+                        'actions' => ['login','plan','error','index','cat','free','search'],
                         'allow' => true,
                     ],
                     [
@@ -140,9 +140,8 @@ class CourseController extends \yii\web\Controller
 
         return $this->render('search', [
             'text' => $text,
-            'items' => Catalog::items([
-                'where' => ['or', ['like', 'title', $text], ['like', 'description', $text]],
-            ])
+            'items' => Category::find()->where(['like', 'title', $text])->orWhere(['like', 'description', $text])->all()
+            
         ]);
     }
 

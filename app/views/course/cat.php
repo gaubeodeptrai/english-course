@@ -63,12 +63,7 @@ if ($lang == 'vi'){
                      </div><!--courses-info #end  -->
                 	
                     
-                     <a class="img-thumb " href="#">
-                        <figure>
-                        <img alt="" src="images\use_img\courses_detail_img.jpg">
-                        </figure>
-                        </a>
-                    
+                   
                     <div class="courses-info">
                     	<h3><?=Yii::t('easyii', 'Course Description')?></h3>
                         <?=$description;?>
@@ -152,9 +147,9 @@ if ($lang == 'vi'){
                                   'name' => 'rating_2',
                                   'value' => $comment->rating,
                                   'disabled' => true,
-                                   
+                                   'language' => 'ru',
                                   'pluginOptions' => [
-                                      'displayOnly' => FALSE,
+                                      'displayOnly' => true,
                                       'size' => 'l',
                                       'theme' => 'Glyphicons Halflings',
                                       'filledStar' => '<i class="glyphicons glyphicon-star"></i>',
@@ -215,10 +210,10 @@ if ($lang == 'vi'){
                           
                         <button class="btn btn-orange"><?=Yii::t('easyii', 'You have this course')?></button>
                         <?php else:?>
-                          <?= Html::a('Buy this course', ['checkout/add', 'id' => $cat->model->category_id], ['class' => 'btn btn-orange']) ?> 
+                          <?= Html::a(Yii::t('easyii', 'Buy this course'), ['checkout/add', 'id' => $cat->model->category_id], ['class' => 'btn btn-orange']) ?> 
                         <?php endif;?>
                      <?php else: ?>
-                        <?= Html::button('Free Course', ['#'], ['class' => 'btn btn-orange']) ?>
+                        <?= Html::button(Yii::t('easyii', 'Free Course'), ['#'], ['class' => 'btn btn-orange']) ?>
                      <?php endif;?>   
                         
                     </div>
@@ -253,7 +248,7 @@ if ($lang == 'vi'){
                        ?>
                      </div>
                      <?php if ($cat->model->type == 'premium'): ?> 
-                        <p class="enroll col-xs-12 col-sm-6"><?=$count_person?> người đã đăng ký</p>
+                        <p class="enroll col-xs-12 col-sm-6"><?=$count_person?> <?=Yii::t('easyii', 'Enrolled')?> </p>
                      <?php endif;?>   
                     </div> <!-- course rat #end -->
                     

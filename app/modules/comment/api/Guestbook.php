@@ -94,17 +94,23 @@ class Guestbook extends \yii\easyii\components\API
 
         echo Html::hiddenInput('errorUrl', $options['errorUrl'] ? $options['errorUrl'] : Url::current([self::SENT_VAR => 0]));
         echo Html::hiddenInput('successUrl', $options['successUrl'] ? $options['successUrl'] : Url::current([self::SENT_VAR => 1]));
-
-        echo $form->field($model, 'name');
+        if (\Yii::$app->user->id):
+          echo $form->field($model, 'name')->textInput(['value' => \Yii::$app->user->identity->username,'readonly'=>true]);
+          
+        else: 
+          echo $form->field($model, 'name');
+        endif;
         //echo $form->field($model, 'item_id');
         echo '<input class="form-control" name="Guestbook[course_id]" type="hidden" value="'.$item_id.'">';
 
         if($settings['enableTitle']) echo $form->field($model, 'title');
         if($settings['enableEmail']) echo $form->field($model, 'email');
         echo $form->field($model, 'rating')->widget(StarRating::classname(), [
+          'language' => 'vi',  
           'pluginOptions' => [
+              'showCaption' => FALSE,
               'step' => 0.5,
-               
+               'displayOnly' => FALSE,
             ] 
         ]);
         

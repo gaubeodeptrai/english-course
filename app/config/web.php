@@ -7,6 +7,7 @@ $webroot = dirname($basePath);
 
 $config = [
     'id' => 'app',
+    'name'=>'Tiếng Anh Giao Tiếp',
     'on beforeAction' => ['\pjhl\multilanguage\Start', 'run'],
     'basePath' => $basePath,
     'bootstrap' => ['log'],
@@ -20,7 +21,7 @@ $config = [
           
         'mailer' => [
         'sender'                => 'no-reply@myhost.com', // or ['no-reply@myhost.com' => 'Sender name']
-        'welcomeSubject'        => 'Welcome subject',
+        'welcomeSubject'        => 'Welcome',
         'confirmationSubject'   => 'Confirmation subject',
         'reconfirmationSubject' => 'Email change subject',
         'recoverySubject'       => 'Recovery subject',
@@ -28,7 +29,7 @@ $config = [
          'enableUnconfirmedLogin' => true,
          'confirmWithin' => 21600,
          'cost' => 12,
-         'admins' => ['root','administrator'],
+         'admins' => ['root','administrator','admin'],
          'controllerMap' => [
                 'admin' => 'yii\easyii\controllers\AdminsController'
             ],   
@@ -53,6 +54,9 @@ $config = [
       ],          
     ],
     'components' => [
+        'mobileDetect' => [
+           'class' => '\skeeks\yii2\mobiledetect\MobileDetect'
+        ],
         'authClientCollection' => [
         'class' => yii\authclient\Collection::className(),
         'clients' => [

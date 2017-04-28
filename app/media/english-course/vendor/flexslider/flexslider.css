@@ -39,8 +39,8 @@ html[xmlns] .flexslider .slides { display: block; }
  * DEFAULT THEME
  * ====================================================================================================================*/
 .flexslider { margin: 0 0 60px 0; overflow:hidden; position: relative; zoom: 1;}
-.slides > li h2 { color:#fff; font-size:48px; }
-.slides > li p { color:#fff; font-size:15px; }
+.slides > li h2 { color:#481111; font-size:40px; }
+.slides > li p { color:#000; font-size:15px; }
 .slides > li .slide-caption .btn-bg { background:#0583e4; color:#fff; }
 .slides > li .slide-caption { padding-top:15%; width:40%; margin:0 25px; }
 

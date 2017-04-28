@@ -12,6 +12,7 @@ use dektrium\user\widgets\Connect;
 use dektrium\user\models\LoginForm;
 use yii\widgets\ActiveForm;
 use dektrium\user\models\RegistrationForm;
+use yii\easyii\modules\text\api\Text;
 
 $base = Yii::$app->getUrlManager()->getBaseUrl();
 ChangeLanguageAsset::register($this);
@@ -30,38 +31,50 @@ $langs = Yii::$app->params['languages'];
         <div class="header_meta">
             <div class="container">
                 <div class="row">
+                   <?php if (!\skeeks\yii2\mobiledetect\MobileDetect::getInstance()->isMobile() ):?>
                     <p class="site-description col-xs-12 col-sm-6">
-                        <a href="#" class="multilanguage-set" data-language="2"><img src="http://clara.com.vn/image/vietnam.gif" width="20px"></a>
-                        <a href="#" class="multilanguage-set" data-language="1"><img src ="http://clara.com.vn/image/english.png" width="20px"></a>
+                        <a href="#" class="multilanguage-set" data-language="2"><img src="http://clara.com.vn/image/vietnam.gif" width="30px"></a>
+                        <a href="#" class="multilanguage-set" data-language="1"><img src ="http://clara.com.vn/image/english.png" width="30px"></a>
                     </p>
+                    <?php endif;?>
                     <nav class="meta-login">
-                        <style>
-                            @media only screen and (min-width: 680px){
-                                .languagle {
-                                    display: none;
-                                }
-                            }
-                        </style>
+                        
                         <ul>
 
-                            <li class="languagle"> <img src="http://clara.com.vn/image/vietnam.gif" width="20px">
-                                <img src ="http://clara.com.vn/image/english.png" width="20px"></li>
+                           
+                            
+                            <?php if (\skeeks\yii2\mobiledetect\MobileDetect::getInstance()->isMobile() ):?>
+                            <li><a href="#" class="multilanguage-set" data-language="2" style="padding-right: 10px"><img src="http://clara.com.vn/image/vietnam.gif" width="30px"></a>
+                            <a href="#" class="multilanguage-set" data-language="1" style="padding-right: 10px"><img src ="http://clara.com.vn/image/english.png" width="30px"></a></li>
+                            
+                            <?php endif;?>
+                            
                             <li class="call"><i class="lnr lnr-phone-handset"></i>0936.437.467</li>
-                            
-                            
+                           
                             <?php
                               if (Yii::$app->user->isGuest){
                             ?>
-                            <li><a href="#login-form" class="fancybox"><?=Yii::t('user', 'Login')?></a></li>
-                            <li><a href="#register-form" class="fancybox"><?=Yii::t('user', 'Sign up')?></a></li>
+                             <?php if (\skeeks\yii2\mobiledetect\MobileDetect::getInstance()->isMobile()):?>
+                               
+                             <?php else :?>
+                               <li><a href="#login-form" class="fancybox"><?=Yii::t('user', 'Login')?></a></li>
+                               <li><a href="#register-form" class="fancybox"><?=Yii::t('user', 'Sign up')?></a></li>
+                             <?php endif;?>
+                            
                            
                             
                             
                             <?php
                               }  else {
                             ?>
-                            <li><?=Html::a('Your Profile ('.Yii::$app->user->identity->username.')',['/user/settings'],['data-method'=>'post']);?></li>
-                            <li><?=Html::a('Logout',['/user/security/logout'],['data-method'=>'post']);?></li>
+                              <?php if (\skeeks\yii2\mobiledetect\MobileDetect::getInstance()->isMobile()):?>
+                               
+                             <?php else :?>
+                               <li><?=Html::a('Your Profile ('.Yii::$app->user->identity->username.')',['/user/settings'],['data-method'=>'post']);?></li>
+                               <li><?=Html::a('Logout',['/user/security/logout'],['data-method'=>'post']);?></li>
+                             <?php endif;?>  
+                               
+                           
                             <?php
                               } 
                             ?>
@@ -115,7 +128,50 @@ $langs = Yii::$app->params['languages'];
                     <div class="collapse navbar-collapse">
                        
                            
+                      <?php
+                              if (Yii::$app->user->isGuest){
+                            ?>
+                             <?php if (\skeeks\yii2\mobiledetect\MobileDetect::getInstance()->isMobile()):?>
+                               <ul class="nav navbar-nav">
+                               <li>
+                                   
+                                              <a href="#login-form" class="fancybox"><?=Yii::t('user', 'Login')?></a> 
+                                          
+                                              <a href="#register-form" class="fancybox"><?=Yii::t('user', 'Sign up')?></a> 
+
+                               </li>
+                               
+                             </ul>  
+                       
+                             <?php else :?>
+                             
+                             <?php endif;?>
                             
+                           
+                            
+                            
+                            <?php
+                              }  else {
+                            ?>
+                              <?php if (\skeeks\yii2\mobiledetect\MobileDetect::getInstance()->isMobile()):?>
+                               <ul class="nav navbar-nav"> 
+                               <li>
+                                  <?=Html::a('Your Profile ('.Yii::$app->user->identity->username.')',['/user/settings'],['data-method'=>'post']);?>
+                                   <?=Html::a('Logout',['/user/security/logout'],['data-method'=>'post']);?>
+                               </li>
+                               
+                              
+                               
+                              </ul> 
+                              <hr/>
+                             <?php else :?>
+                              
+                             <?php endif;?>  
+                               
+                           
+                            <?php
+                              } 
+                            ?>      
 
                     <?= Menu::widget([
                         'options' => ['class' => 'nav navbar-nav'],
@@ -132,6 +188,9 @@ $langs = Yii::$app->params['languages'];
                                 </a>
                             </li>
                         </ul>
+                        
+                        
+                        
                     </div>
                 </nav>
                 <!-- #site-navigation  #end-->
@@ -149,56 +208,30 @@ $langs = Yii::$app->params['languages'];
         <div class="push"></div>
 
         
-<div class="signup-newsletter">
-	<div class="container">
-    	<div class="row">
-             <div class="col-xs-12 col-sm-6">
-             <span class="i-email-subscribe"><i class="icon-envelope-letter icons"></i></span>
-             <h3>Signup for Newsletter</h3>
-             <p>Lorem Ipsum is simply dummy text of the printing contents and typesetting industry.</p>
-             </div>
-             
-             <div class="col-xs-12 col-sm-6">
-             	<?php if(Yii::$app->request->get(Subscribe::SENT_VAR)) : ?>
-                    You have successfully subscribed
-                <?php else : ?>
-                    <?= Subscribe::form() ?>
-                <?php endif; ?>
-            </div>
-        </div> 
-    </div>
-</div> <!-- #signup_newsletter End -->        
+  
 
 <footer id="colophon" class="site-footer">
     <div class="container">
         <div class="row">
             <div class="col-xs-12 col-sm-3 footer-widget">
                 <aside class="widget widget_text" id="text-1">
-                    <h6 class="widget-title">About Tieng Anh Giao Tiep</h6>
+                    <h6 class="widget-title"><?=Yii::t('easyii', 'About us')?> Tieng Anh Giao Tiep</h6>
                     <div class="textwidget">
-                        <p>Lorem ipsum dolor sit amet, consectet
-                            ur adipiscing Nunc varius sed dolor
-                            sed sagittis will be helpful.</p>
-                        <p>Morbi quis eros ornare, rhoncus lorem
-                            efficitur erat. Morbi est at.</p>
+                        <p>
+                            <?= Text::get('about') ?>
+                        </p>
                     </div>
                 </aside>
             </div>
 
             <div class="col-xs-12 col-sm-3 footer-widget">
                 <aside class="widget menu">
-                    <h6 class="widget-title">Quick Links</h6>
-                    <ul>
-                        <li><a href="#">Courses</a></li>
-                        <li><a href="#">Instructor</a></li>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Terms of Use</a></li>
-                        <li><a href="#">Events</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">Legal Desclaimer</a></li>
-                        <li><a href="#">Shortcodes</a></li>
-                    </ul>
+                    <h6 class="widget-title"><?=Yii::t('easyii', 'Quick Links')?></h6>
+                   <?= Menu::widget([
+                        
+                        'items' => $menuItems,
+                        'activateParents'=>true,
+                    ]);?>
                 </aside>
 
             </div>
@@ -206,21 +239,32 @@ $langs = Yii::$app->params['languages'];
 
             <div class="col-xs-12 col-sm-3 footer-widget">
                 <aside class="widget widget_courses">
-                    <h6 class="widget-title">Recent Courses</h6> <ul>
+                    <h6 class="widget-title"><?=Yii::t('easyii', 'Recent Courses')?></h6> <ul>
+                        <?php
+                          
+                          $courses = \app\modules\courses\models\Category::find()
+                                  ->where(['status'=>1])
+                                  ->andWhere('depth = 0')
+                                  ->limit(2)
+                                  ->all();  
+                          foreach ($courses as $course):
+                              if ($lang == 2){
+                                $title = $course->title;  
+                             }else{
+                                $title = $course->title_en;   
+                             }
+                        ?>
+                        
                         <li class="clearfix">
-                            <img alt="" class="course-media-img" src="images\use_img\f1.jpg">
+                            <img alt="" class="course-media-img" src="<?=$base?><?=$course->image?>">
                             <div class="simi-co">
-                                <h5><a href="#">Learn to Use jQuery UI Widgets</a></h5>
-                                <p>Maecenas cursus mauris libero, a imperdi.</p>
+                                <h5><a href="<?=$base?>/course/cat/<?=$course->slug?>"><?=$title?></a></h5>
+                                
                             </div>
                         </li>
-                        <li class="clearfix">
-                            <img alt="" class="course-media-img" src="images\use_img\f2.jpg">
-                            <div class="simi-co">
-                                <h5><a href="#">Learn to Use jQuery UI Widgets</a></h5>
-                                <p>Maecenas cursus mauris libero, a imperdi.</p>
-                            </div>
-                        </li>
+                       <?php
+                   endforeach;
+                       ?>
                     </ul>
                 </aside>
             </div>
@@ -228,14 +272,12 @@ $langs = Yii::$app->params['languages'];
 
             <div class="col-xs-12 col-sm-3 footer-widget">
                 <aside class="widget widget_quickcontact">
-                    <h6 class="widget-title">Quick Contact</h6>
-                    <form class="quickcontact" method="post" action="#">
-                        <input type="email" placeholder="Your email address" class="qc-text" size="40" value="" name="your-email">
-                        <textarea placeholder="Type your message" aria-invalid="false" class="qc-textarea" rows="10" cols="40" name="your-message"></textarea>
-                        <div class="quicksubmit">
-                            <input type="submit" class="qc-submit btn btn-default" value="→">
-                        </div>
-                    </form>
+                    <h6 class="widget-title"><?=Yii::t('easyii', 'Subscribe to Newsletter')?></h6>
+                    <?php if(Yii::$app->request->get(Subscribe::SENT_VAR)) : ?>
+                    You have successfully subscribed
+                <?php else : ?>
+                    <?= Subscribe::form() ?>
+                <?php endif; ?>
                 </aside>
             </div>
 

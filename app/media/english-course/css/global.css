@@ -1249,7 +1249,7 @@ background:url(../images/border_bottom.png) no-repeat left bottom; }
 --------------------------------------------------------------*/
 
 .site-footer { 
-	background:#262c38; 
+	background:#000000; 
 }
 .site-footer .footer-widget:nth-child(4) {  }
 .copyright { padding:25px 0; border-top:1px solid #2f3543; }

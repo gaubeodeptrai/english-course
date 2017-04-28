@@ -119,7 +119,7 @@ function renderNode($node){
                                       'size' => 'l',
                                       'theme' => 'Glyphicons Halflings',
                                       'filledStar' => '<i class="glyphicons glyphicon-star"></i>',
-                                      'emptyStar' =>  '<span class="glyphicon glyphicon-star-empty"></span>',
+                                      //'emptyStar' =>  '<span class="glyphicon glyphicon-star-empty"></span>',
                                       
                                    ] 
                                 ]);
@@ -157,9 +157,9 @@ function renderNode($node){
     <!-- sidebar start-->
     <div class="widget-area col-xs-12 col-sm-4 pull-right" id="secondary">
       <aside class="widget widget_search">
-        <h3 class="widget-title">Search Course</h3>
-        <form action="#" class="search-form search-course">
-            <input type="search" title="What do you want to learn today?" name="s" value="" placeholder="What do you want to learn today?" class="search-field">
+        <h3 class="widget-title"><?=Yii::t('easyii', 'Search Course')?></h3>
+        <form action="<?=$base?>/course/search" class="search-form search-course">
+            <input type="search" title="<?=Yii::t('easyii', 'What do you want to learn today')?>" name="text" value="" placeholder="What do you want to learn today?" class="search-field">
           <button type="submit" class="btn btn-orange btn-medium course-submit"> <i class="lnr lnr-magnifier"></i> </button>
         </form>
       </aside>
@@ -168,7 +168,7 @@ function renderNode($node){
       
     
       <aside class="widget widget_courses">
-        <h3 class="widget-title">Free Courses</h3>
+        <h3 class="widget-title"><?=Yii::t('easyii', 'Premium Course')?></h3>
         <ul>
           <?php foreach ($premium_courses as $course):?>  
           <li class="clearfix">
@@ -203,7 +203,7 @@ function renderNode($node){
                                       'size' => 'l',
                                       'theme' => 'Glyphicons Halflings',
                                       'filledStar' => '<i class="glyphicons glyphicon-star"></i>',
-                                      'emptyStar' =>  '<span class="glyphicon glyphicon-star-empty"></span>',
+                                      //'emptyStar' =>  '<span class="glyphicon glyphicon-star-empty"></span>',
                                       
                                    ] 
                                 ]);
