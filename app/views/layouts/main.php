@@ -331,6 +331,7 @@ $langs = Yii::$app->params['languages'];
                 <?php //echo Html::a(Yii::t('user', 'Don\'t have an account? Sign up!'), ['/user/registration/register']) ?>
                  <a href="#register-form" class="fancybox"><?=Yii::t('user', 'Don\'t have an account? Sign up!')?></a>
             </p>
+            
             <p>
                 <a href="user/auth?authclient=facebook" class="btn btn-block btn-social btn-facebook" style="text-align: center;text-decoration: none; color: white">
                <i class="fa fa-facebook"></i> Sign in with Facebook

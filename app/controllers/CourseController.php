@@ -158,7 +158,7 @@ class CourseController extends \yii\web\Controller
         if ($type == 'premium'){
         $paid = Good::find()->where(['item_id'=>$course])->joinWith([
             'order'=> function($query){
-                $query->andWhere(['user_id' => Yii::$app->user->id]);
+                $query->andWhere(['status' => 7]);
             },
         ])->count();
         }    

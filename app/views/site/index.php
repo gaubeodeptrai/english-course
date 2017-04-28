@@ -243,7 +243,13 @@ $lang = LangHelper::getLanguage(Yii::$app->language)['id'];
             </div><!-- /row  #end -->
         </div><!-- /container  #end -->
     </section> 
-       
+       <video controls width="400" 
+       autoplay loop muted
+       poster="poster.png">
+  <source src="<?=$base?>/uploads/videos/oceans.mp4" type="video/mp4">
+  <source src="rabbit320.webm" type="video/webm">
+  <p>Your browser doesn't support HTML5 video. Here is a <a href="rabbit320.mp4">link to the video</a> instead.</p>
+</video>
        
 
 

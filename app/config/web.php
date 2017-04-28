@@ -31,7 +31,7 @@ $config = [
          'cost' => 12,
          'admins' => ['root','administrator','admin'],
          'controllerMap' => [
-                'admin' => 'yii\easyii\controllers\AdminsController'
+                'admin' => 'yii\easyii\controllers\AdminsController',
             ],   
         ],
         //'gii' => 'yii\gii\Module',

@@ -17,6 +17,7 @@ $module = $this->context->module->id;
     'options' => ['enctype' => 'multipart/form-data', 'class' => 'model-form']
 ]); ?>
 <?= $form->field($model, 'title') ?>
+<?= $form->field($model, 'title_en') ?>
 <?php if($settings['itemThumb']) : ?>
     <?php if($model->image) : ?>
         <img src="<?= Image::thumb($model->image, 240) ?>">
@@ -70,10 +71,21 @@ $module = $this->context->module->id;
 ]);  
    
   }
-?>      
+?>    
+<br/>        
+<?= $form->field($model, 'video_time'); ?>        
 <br/>        
 <?php if($settings['itemDescription']) : ?>
     <?= $form->field($model, 'description')->widget(Redactor::className(),[
+        'options' => [
+            'minHeight' => 400,
+            'imageUpload' => Url::to(['/admin/redactor/upload', 'dir' => 'courses'], true),
+            'fileUpload' => Url::to(['/admin/redactor/upload', 'dir' => 'courses'], true),
+            'plugins' => ['fullscreen']
+        ]
+    ]) ?>
+
+    <?= $form->field($model, 'description_en')->widget(Redactor::className(),[
         'options' => [
             'minHeight' => 400,
             'imageUpload' => Url::to(['/admin/redactor/upload', 'dir' => 'courses'], true),

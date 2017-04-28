@@ -13,7 +13,17 @@ $node = app\modules\courses\models\Category::find()->where('category_id ='.$root
 $node_type = $node->type;
 $node_title = $node->title;
 $node_slug = $node->slug;
-
+$lang = Yii::$app->language;
+if ($lang == 'en'){
+ $title = 'title_en';
+ $description = 'description_en';
+} 
+else{
+ $title = 'title';  
+ $description = 'description';
+}
+                               
+                        
 $colors = [];
 if(!empty($item->data->color) && is_array($item->data->color)) {
     foreach ($item->data->color as $color) {
@@ -22,7 +32,7 @@ if(!empty($item->data->color) && is_array($item->data->color)) {
 }
 ?>
 
-<div class="breadcrumb-section">
+<div class="breadcrumb-section" >
 	<div class="container">
     	<div class="row">
             <header class="entry-header">
@@ -50,7 +60,7 @@ if(!empty($item->data->color) && is_array($item->data->color)) {
 </div>
 
 
-<div class="page-spacer clearfix"> 
+<div class="page-spacer clearfix" oncontextmenu="return false;"> 
  <div id="primary">
         <div class="container">
         	<div class="row">
@@ -66,6 +76,7 @@ if(!empty($item->data->color) && is_array($item->data->color)) {
                           ->where(['tree'=>$item->cat->tree])
                           ->andWhere('status = 1')
                           ->andWhere('depth > 0')
+                          ->orderBy(['lft'=>SORT_ASC])
                           ->all();  
                   foreach ($list_sub_courses as $sub_course): 
                       $list_items = app\modules\courses\models\Item::find()
@@ -80,7 +91,7 @@ if(!empty($item->data->color) && is_array($item->data->color)) {
                         <h4 class="panel-title" >
                             <a data-toggle="collapse" data-parent="#accordion" href="#collapse<?=$sub_course->category_id?>">
                             
-                              <?=$sub_course->title?>
+                              <?=$sub_course->$title?>
                             </a>
                         </h4>
                     </div>
@@ -119,7 +130,7 @@ if(!empty($item->data->color) && is_array($item->data->color)) {
                                 <tr>
                                     <td>
                                         
-                                        <?=$icon?><a href="<?=$base?>/course/view/<?=$content->slug?>?close=<?=$sub_course->category_id?>" style="padding-left: 9px; color:<?=$color?>"><?=$content->title?></a>
+                                        <?=$icon?><a href="<?=$base?>/course/view/<?=$content->slug?>?close=<?=$sub_course->category_id?>" style="padding-left: 9px; color:<?=$color?>"><?=$content->$title?></a>
                                     </td>
                                 </tr>
                                 <?php endforeach;?>    
@@ -152,7 +163,17 @@ if(!empty($item->data->color) && is_array($item->data->color)) {
               <?php    
                if ($paid=='free' || $paid > 0):    
                    if ($ext == 'mp4'|| $ext == 'mkv'||$ext == 'ts'){
-              ?>
+               ?>        
+                      <?php if (\skeeks\yii2\mobiledetect\MobileDetect::getInstance()->isMobile()):?>
+                           <video controls width="100%" 
+                                   autoplay loop
+                                   poster="poster.png">
+                              <source src="<?=$base?><?=$item->model->video?>" type="video/mp4">
+                              <source src="rabbit320.webm" type="video/webm">
+                              <p>Your browser doesn't support HTML5 video. Here is a <a href="rabbit320.mp4">link to the video</a> instead.</p>
+                           </video>
+                      <?php else:?>
+              
                  <style>
                     video::-internal-media-controls-download-button {
                         display:none;
@@ -197,8 +218,10 @@ if(!empty($item->data->color) && is_array($item->data->color)) {
                     ]
                 ]);
                 ?>
-                   <?php }?>
-                <?= $item->description ?>
+                   <?php 
+                 endif; 
+                }?>
+                <?= $item->model->$description ?>
                 <?php else : ?>
                     <div class="alert alert-warning" style="font-size: 20px; text-align: center">
                       <a class="close">

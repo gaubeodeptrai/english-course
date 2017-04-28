@@ -20,11 +20,12 @@ class Item extends \yii\easyii\components\ActiveRecord
     {
         return [
             ['title', 'required'],
-            ['title', 'trim'],
-            ['title', 'string', 'max' => 128],
+            ['title', 'trim'],['title_en', 'trim'],
+            ['title', 'string', 'max' => 128],['title_en', 'string', 'max' => 128],
             ['image', 'image'],
             ['video', 'string'],
-            ['description', 'safe'],
+            ['video_time','string'],
+            ['description', 'safe'],['description_en', 'safe'],
             ['price', 'number'],
             ['discount', 'integer', 'max' => 99],
             [['status', 'category_id', 'available', 'time'], 'integer'],
@@ -38,9 +39,11 @@ class Item extends \yii\easyii\components\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'title' => Yii::t('easyii', 'Title'),
+            'title' => Yii::t('easyii', 'Title VN'),
+            'title_en' => Yii::t('easyii', 'Title EN'),
             'image' => Yii::t('easyii', 'Image'),
-            'description' => Yii::t('easyii', 'Description'),
+            'description' => Yii::t('easyii', 'Description VN'),
+            'description_en' => Yii::t('easyii', 'Description EN'),
             'available' => Yii::t('easyii/courses', 'Available'),
             'price' => Yii::t('easyii/courses', 'Price'),
             'discount' => Yii::t('easyii/courses', 'Discount'),

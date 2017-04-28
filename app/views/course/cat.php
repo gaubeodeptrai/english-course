@@ -75,6 +75,7 @@ if ($lang == 'vi'){
                 $cats = \app\modules\courses\models\Category::find()
                 ->where(['tree'=>$cat->model->category_id])
                 ->andWhere('category_id <>'.$cat->model->category_id)
+                ->orderBy(['lft'=>SORT_ASC])        
                 ->all();
                 if (count($cats)):
                 foreach ($cats as $cat_sub):
@@ -99,12 +100,21 @@ if ($lang == 'vi'){
                     ?>
                       <li class="courses-open">
                         <p class="ctitle"> 
-                           <span class="title"><?=$icon?>  
-                             <?=Html::a($item->title, ['/course/view', 'slug' => $item->slug,'close'=>$cat_sub->category_id])?>
+                           <span class="title"><?=$icon?>
+                             <?php
+                               if ($lang == 'en'){
+                                 $title = 'title_en';
+                               } 
+                               else{
+                                 $title = 'title';  
+                               }
+                               
+                             ?>  
+                             <?=Html::a($item->$title, ['/course/view', 'slug' => $item->slug,'close'=>$cat_sub->category_id])?>
                            </span>    
                           
                            <p class="other">
-                            <span class="time"><i class="fa fa-clock-o"></i> 11:30</span> 
+                            <span class="time"><i class="fa fa-clock-o"></i> <?=$item->video_time?></span> 
                             <span class="info"> <?=$type?></span>
                            </p> 
                         </p>    
